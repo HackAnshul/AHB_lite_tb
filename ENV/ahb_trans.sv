@@ -39,8 +39,8 @@ class ahb_trans extends sv_sequence_item;
     ram_trans lhs;
     $cast(lhs,rhs);
     $display("====================== %10s ====================== \@%0t ",block,$time);
-    //$display("| Kind_e | rst | wr_addr | wr_data | rd_addr | rd_data |");
-    //$display("| %6s | %3d | %7d | %7d | %7d | %7d |", lhs.kind_e.name, lhs.rst, lhs.wr_addr, lhs.wr_data, lhs.rd_addr, lhs.rd_data);
+    $display("| rst | sel | address | htrans | hwrite | hsize | hburst | hprot | hwdata | hrdata | hreadyout | hresp |");
+    $display("| %0d | %0d | %0d     | %0d    | %0d    | %0d   | %0d    | %0d   |  %0d   |   %0d  | %0d       |  $0d  |",hresetn, hsel, haddr, htrans, hwrite, hsize, hburst, hprot, hwdata, hrdata, hreadyout, hresp);
   endfunction
 
 endclass
