@@ -11,7 +11,10 @@
 `define AHB_DRIVER_SV
 
 class ahb_driver;
-  ahb_trans trans_h;
+  ahb_trans trans_h, trans_h2;
+  ahb_trans addr_que[$];
+  ahb_trans data_que[$];
+
 
   //mailbox
   mailbox #(ahb_trans) gen2drv;
@@ -33,10 +36,13 @@ class ahb_driver;
       fork
         begin
           gen2drv.get(trans_h);
-          trans_h.print(trans_h,"Driver");
-          send_to_dut();
-          -> drv_comp;
+          addr_que.push_back(trans_h);
+          // trans_h.print(trans_h,"Driver");
+          // send_to_dut();
         end
+        drive_control();
+        drive_data();
+        // -> drv_comp;
         wait_reset_assert();
       join_any
       disable fork;
@@ -45,6 +51,12 @@ class ahb_driver;
   endtask
 
   //description
+  task drive_control();
+    wait(addr_que != 0)
+    trans_h2 = addr_que.pop_front();
+    
+  endtask
+
   task send_to_dut();
     //drive data to design
     @(vif.drv_cb);
