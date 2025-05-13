@@ -8,44 +8,38 @@
 
 `ifndef AHB_INF_SV
 `define AHB_INF_SV
-//typedef RAM_INF_SV
 
-interface ahb_inf(input hclk);
+interface AHB_if(input logic hclk, input logic hresetn);
 
-  logic hresetn;
-  logic hsel;
-  logic hready;
+  // AHB-lite master signals
+  logic [31:0] haddr;
+  logic [1:0]  htrans;
+  logic        hwrite;
+  logic [2:0]  hsize;
+  logic [2:0]  hburst;
+  logic [3:0]  hprot;
+  logic        hsel;
+  logic        hready;
+  logic [`ADDR_WIDTH-1:0] hwdata;
+  logic [`DATA_WIDTH-1:0] hrdata;
+  logic        hreadyout;
+  logic [1:0]  hresp;
 
-  logic [2:0] hsize;
-  logic [2:0] hburst;
-  logic [1:0] htrans;
-  logic [(`ADDR_WIDTH-1):0] haddr;
-  logic [(`DATA_WIDTH-1):0] hwdata;
 
-  logic [(`DATA_WIDTH-1):0] hrdata;
-  logic hreadyout;
-  logic hresp;
-
-  //// driver's clocking block ////
-  clocking drv_cb @(posedge Hclk);
+ clocking drv_cb @(posedge hclk);
     default input #1 output #1;
-    input hresetn;
-    output hsel, hready, hsize, hburst, htrans, haddr, hwdata;
-    output hrdata, hreadyout, hresp;
+    input hresetn, hreadyout, hresp, hrdata;
+    output hwrite, haddr, hwdata, htrans, hsize, hburst;
   endclocking
 
-  //// monitor's clocking block ////
-  clocking mon_cb @(posedge Hclk);
+  //clocking block for monitor
+  clocking mon_cb @(posedge hclk);
     default input #1 output #1;
-    input hresetn;
-    input hsel, hready, hsize, hburst, htrans, haddr, hwdata;
-    input hrdata, hreadyout, hresp;
+    input hresetn, hreadyout, hresp, hwrite, haddr, hwdata, hrdata, htrans, hsize, hburst;
   endclocking
 
   modport DRV_MP (clocking drv_cb, input hclk);
   modport MON_MP (clocking mon_cb, input hclk);
 
-
 endinterface
-
 `endif

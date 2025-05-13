@@ -4,37 +4,33 @@
 `ifndef AHB_TRANS_SV
 `define AHB_TRANS_SV
 
-`include "ahb_defines.svh"
+typedef enum bit[2:0] {SINGLE, INCR, WRAP4, INCR4, WRAP8, INCR8, WRAP16, INCR16} burst_type;
 
-class ahb_trans extends sv_sequence_item;
-  bit HRESETn;
-  static int wr_cnt, rd_cnt;
+class AHB_trans;
 
+  bit hresetn;                                //active low signal
+  bit hsel;                                   //slave select line
+  rand bit [`ADDR_WIDTH-1:0]haddr;            //address bus
+  bit [1:0]htrans;                            //transaction type
+  bit hwrite;                                 //trasnfer direction
+  rand bit[2:0]hsize;                         //transfer size
+  //bit[2:0]hburst;                             //burst type
+  rand bit [`DATA_WIDTH-1:0]hwdata;           //write data
 
-  static int que[$];
-  bit Hsel;
-  rand bit Hwrite;
-  rand bit Hready;
-  rand bit [2:0] Hsize;
-  rand bit [2:0] Hburst;
-  rand bit [1:0] Htrans;
-  rand bit [(`ADDR_WIDTH-1):0] Haddr;
-  rand bit [(`DATA_WIDTH-1):0] Hwdata;
+  //slave output signals
+  bit [31:0]hrdata;                           //read data
+  bit hreadyout;                              //transfer status signal
+  bit[1:0] hresp;                             //response signal
 
-  rand bit [(`DATA_WIDTH-1):0] Hrdata;
-  rand bit Hreadyout;
-  rand bit Hresp;
+  burst_type hburst_e;                        //enum instantiation of hburst_type enum
+  //queue for storing addresses of the burst transaction
+  bit [`ADDR_WIDTH-1: 0] haddr_que[$];
 
+  //queue for storing write data and read data
+  bit [`DATA_WIDTH-1 :0]hwdata_que[$];			//write data
+  bit [`DATA_WIDTH-1 :0]hrdata_que[$];			//read data
 
-  //write default constraint if needed
-
-  //add static variables to record no. of write and read transaction
-
-  //override print/display method to print transaction attributes
-
-  function void post_randomize();
-  endfunction
-
+//write a constraint for 1kb limit
   function void print(sv_sequence_item rhs, string block);
     ram_trans lhs;
     $cast(lhs,rhs);
@@ -43,6 +39,21 @@ class ahb_trans extends sv_sequence_item;
     $display("| %0d | %0d | %0d     | %0d    | %0d    | %0d   | %0d    | %0d   |  %0d   |   %0d  | %0d       |  $0d  |",hresetn, hsel, haddr, htrans, hwrite, hsize, hburst, hprot, hwdata, hrdata, hreadyout, hresp);
   endfunction
 
+  //function for calculating number of transfers in a transaction
+  function int calc_txf();
+    case(this.hburst_e)
+      SINGLE : return 1;
+      INCR : return 1;			//temporary value for INCR
+      WRAP4: return 4;
+      INCR4 : return 4;
+      WRAP8: return 8;
+      INCR8 : return 8;
+      WRAP16: return 16;
+      INCR16 : return 16;
+    endcase
+  endfunction
+
 endclass
 
 `endif
+
