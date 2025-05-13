@@ -42,12 +42,12 @@ class ahb_driver;
           vif.drv_cb.hwrite <= trans_h2.hwrite;
           vif.drv_cb.hsize <= trans_h2.hsize;
           vif.drv_cb.hburst <= trans_h2.hburst;
-          vif.drv_cb.htrans <= 2'h10;               //NONSEQ
+          vif.drv_cb.htrans <= 2'b10;               //NONSEQ
           data_phase_que.push_back(trans_h2);
         end
 
         if(i!=0)
-          vif.drv_cb.htrans <= 2'h11;               //SEQ
+          vif.drv_cb.htrans <= 2'b11;               //SEQ
 
         //always sends address
         vif.drv_cb.haddr <= trans_h2.haddr_que.pop_front();
