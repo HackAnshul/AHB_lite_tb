@@ -1,96 +1,46 @@
-// Code your testbench here
-// or browse Examples
-// guard statement to avoid multiple compilation of a file
-`ifndef RAM_TB_TOP_SV
-`define RAM_TB_TOP_SV
-`include "ram_pkg.sv"
+`ifndef AHB_TB_TOP_SV
+`define AHB_TB_TOP_SV
+`include "AHB_pkg.sv"
 
-module ahb_tb_top();
-  parameter TIMEOUT = 200000;
-  bit clk;
+module AHB_tb_top;
+  import AHB_pkg::*;
+// Base test instance
+  AHB_gen gen1;
+  AHB_base_test test;
+  // Clock and reset
+  logic hclk;
+  logic hresetn;
 
-  // import the package
-  import ahb_pkg::* ;
+  // AHB interface instance
+  AHB_if AHB_if_inst(hclk, hresetn);
 
-  // take instance of actual interface
-  ahb_inf r_inf(clk);
 
-  // take instance of test class
-  ahb_base_test r_test;
 
-  // intantiate design
-  ahb dut(
-    .clk(clk),
-    .rst(r_inf.rst),
-    .wr_enb(r_inf.wr_enb),
-    .wr_addr(r_inf.wr_addr),
-    .wr_data(r_inf.wr_data),
-    .rd_enb(r_inf.rd_enb),
-    .rd_addr(r_inf.rd_addr),
-    .rd_data(r_inf.rd_data));
+  // Clock generation
+  always #5 hclk = ~hclk;
 
-  task reset_assertion();
-    @(posedge clk);
-    r_inf.rst = 1'b1; //apply for reset
-   // -> rst_assert;
-    $display("reset asserted");
-    repeat(2)@(posedge clk);
-    r_inf.rst = 1'b0; //reset deassert
-   // -> rst_release;
-  endtask
-
-  task run_test();
-    if ($time != 0) $fatal("error! run_test method must called at 0 simulation time! called at %t",$time);
-
-    // Create test
-    r_test = new();
-    r_test.build();
-    r_test.connect(r_inf.DRV_MP, r_inf.MON_MP);
-
-    fork
-      r_test.run();
-    join_none
-    #0;
-    fork
-      wait(ram_pkg::objection_count == 0);
-      begin
-        #TIMEOUT;
-        $fatal("Terminated because of global timeout %d",TIMEOUT);
-      end
-    join_any
-    disable fork;
-    $finish;
-  endtask
-
+  // Reset generation
   initial begin
-    $dumpfile("ram_tb_top.vcd"); $dumpvars;
+    hclk = 0;
+    hresetn = 0;
+    repeat(2) @(posedge hclk)
+    hresetn = 1;
   end
 
+  // Instantiate and connect the testbench
   initial begin
-    reset_assertion();
+    test = new();
+
+      test.build();
+
+    // Connect driver and monitor modports of interface to base test
+    test.connect(AHB_if_inst.MON_MP, AHB_if_inst.DRV_MP);
+    // Optionally run if needed
+    //$display("Test running...");
+    test.run();
+    #100 $finish;
   end
 
-  //generate clock
-  initial begin
-    clk = 0;
-    forever #5 clk = ~clk;
-  end
-
-  initial begin
-    forever begin
-      @(ram_pkg::rst_drv); // wait for event
-      $display($time," reset is applied");
-      reset_assertion();
-    end
-  end
-
-  initial begin
-    run_test();
-  end
-  final
-  begin
-    r_test.env.print_sb();
-  end
 endmodule
 
 `endif

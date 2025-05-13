@@ -31,7 +31,7 @@ virtual class ahb_gen;
     req.print(req,"generator");
     this.gen2drv.put(req_copy);
     //wait(drv_comp.triggered);
-    @(drv_comp);
+    //@(drv_comp);
   endtask
 endclass
 

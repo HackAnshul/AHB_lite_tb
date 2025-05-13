@@ -10,40 +10,40 @@
 `define AHB_INF_SV
 //typedef RAM_INF_SV
 
-interface ahb_inf(input Hclk);
+interface ahb_inf(input hclk);
 
-  logic HRESETn;
-  logic Hsel;
-  logic Hready;
+  logic hresetn;
+  logic hsel;
+  logic hready;
 
-  logic [2:0] Hsize;
-  logic [2:0] Hburst;
-  logic [1:0] Htrans;
-  logic [(`ADDR_WIDTH-1):0] Haddr;
-  logic [(`DATA_WIDTH-1):0] Hwdata;
+  logic [2:0] hsize;
+  logic [2:0] hburst;
+  logic [1:0] htrans;
+  logic [(`ADDR_WIDTH-1):0] haddr;
+  logic [(`DATA_WIDTH-1):0] hwdata;
 
-  logic [(`DATA_WIDTH-1):0] Hrdata;
-  logic Hreadyout;
-  logic Hresp;
+  logic [(`DATA_WIDTH-1):0] hrdata;
+  logic hreadyout;
+  logic hresp;
 
   //// driver's clocking block ////
   clocking drv_cb @(posedge Hclk);
     default input #1 output #1;
-    input HRESETn;
-    output Hsel, Hready, Hsize, Hburst, Htrans, Haddr, Hwdata;
-    output Hrdata, Hreadyout, Hresp;
+    input hresetn;
+    output hsel, hready, hsize, hburst, htrans, haddr, hwdata;
+    output hrdata, hreadyout, hresp;
   endclocking
 
   //// monitor's clocking block ////
   clocking mon_cb @(posedge Hclk);
     default input #1 output #1;
-    input HRESETn;
-    input Hsel, Hready, Hsize, Hburst, Htrans, Haddr, Hwdata;
-    input Hrdata, Hreadyout, Hresp;
+    input hresetn;
+    input hsel, hready, hsize, hburst, htrans, haddr, hwdata;
+    input hrdata, hreadyout, hresp;
   endclocking
 
-  modport DRV_MP (clocking drv_cb, input Hclk);
-  modport MON_MP (clocking mon_cb, input Hclk);
+  modport DRV_MP (clocking drv_cb, input hclk);
+  modport MON_MP (clocking mon_cb, input hclk);
 
 
 endinterface
