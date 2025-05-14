@@ -18,7 +18,9 @@ module ahb_tb_top;
 
 
   // Clock generation
-  always #5 hclk = ~hclk;
+  initial begin
+    forever #5 hclk = ~hclk;
+  end
 
   // Reset generation
   initial begin
