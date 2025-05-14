@@ -21,7 +21,6 @@ class ahb_driver;
   //virtual interface
   virtual ahb_inf.DRV_MP vif;
 
-
   function void connect (mailbox #(ahb_trans) mbx,
                          virtual ahb_inf.DRV_MP vif);
     this.gen2drv = mbx;
@@ -33,7 +32,7 @@ class ahb_driver;
     bit first_trans_flag = 1'b0; //flag for indicating the first operation of the burst
 
     forever begin
-      wait(addr_phase_que != 0)
+      wait(addr_phase_que.size != 0)
       trans_h2=addr_phase_que.pop_front();
       for(int i =0; i<trans_h2.calc_txf; i++) begin
         if(i==0) begin
@@ -41,7 +40,7 @@ class ahb_driver;
           first_trans_flag = 1'b1;
           vif.drv_cb.hwrite <= trans_h2.hwrite;
           vif.drv_cb.hsize <= trans_h2.hsize;
-          vif.drv_cb.hburst <= trans_h2.hburst;
+          vif.drv_cb.hburst <= int'(trans_h2.hburst_e);
           vif.drv_cb.htrans <= 2'b10;               //NONSEQ
           data_phase_que.push_back(trans_h2);
         end
@@ -59,7 +58,7 @@ class ahb_driver;
     bit first_trans_flag = 1'b0;
 
     forever begin
-      wait(data_phase_que != 0);
+      wait(data_phase_que.size != 0);
 
       trans_h3 = data_phase_que.pop_front();
       if(!first_trans_flag)
@@ -68,7 +67,7 @@ class ahb_driver;
       first_trans_flag = 1'b1;
 
       for(int i=0; i<trans_h3.calc_txf;i++) begin
-        if(trans_h3.HWRITE)
+        if(trans_h3.hwrite)
           vif.drv_cb.hwdata <= trans_h3.hwdata;
         @(vif.drv_cb iff vif.drv_cb.hreadyout);
       end
@@ -81,7 +80,7 @@ class ahb_driver;
   task wait_reset_assert();
     wait (vif.drv_cb.HRESETn == 0);
   endtask
-  
+
  task run();
     trans_h = new();
     trans_h2 =new();
@@ -89,7 +88,7 @@ class ahb_driver;
     fork
       forever begin
         gen2drv.get(trans_h);
-        trans_h.print("Driver");
+        trans_h.print(trans_h,"Driver");
         addr_phase_que.push_back(trans_h);
       end
       drive_control_io();                       //drives the control signals of AHB

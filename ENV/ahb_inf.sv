@@ -9,7 +9,7 @@
 `ifndef AHB_INF_SV
 `define AHB_INF_SV
 
-interface AHB_if(input logic hclk, input logic hresetn);
+interface ahb_inf(input logic hclk, input logic hresetn);
 
   // AHB-lite master signals
   logic [31:0] haddr;

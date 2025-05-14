@@ -6,7 +6,7 @@
 
 typedef enum bit[2:0] {SINGLE, INCR, WRAP4, INCR4, WRAP8, INCR8, WRAP16, INCR16} burst_type;
 
-class AHB_trans;
+class ahb_trans extends sv_sequence_item;
 
   bit hresetn;                                //active low signal
   bit hsel;                                   //slave select line
@@ -32,11 +32,11 @@ class AHB_trans;
 
 //write a constraint for 1kb limit
   function void print(sv_sequence_item rhs, string block);
-    ram_trans lhs;
+    ahb_trans lhs;
     $cast(lhs,rhs);
     $display("====================== %10s ====================== \@%0t ",block,$time);
-    $display("| rst | sel | address | htrans | hwrite | hsize | hburst | hprot | hwdata | hrdata | hreadyout | hresp |");
-    $display("| %0d | %0d | %0d     | %0d    | %0d    | %0d   | %0d    | %0d   |  %0d   |   %0d  | %0d       |  $0d  |",hresetn, hsel, haddr, htrans, hwrite, hsize, hburst, hprot, hwdata, hrdata, hreadyout, hresp);
+    $display("| rst | sel | address | htrans | hwrite | hsize | hburst | hwdata | hrdata | hreadyout | hresp |");
+    $display("| %0d | %0d | %0d     | %0d    | %0d    | %0d   | %0s    |  %0d   |   %0d  | %0d       |  $0d  |",hresetn, hsel, haddr, htrans, hwrite, hsize, hburst_e, hwdata, hrdata, hreadyout, hresp);
   endfunction
 
   //function for calculating number of transfers in a transaction

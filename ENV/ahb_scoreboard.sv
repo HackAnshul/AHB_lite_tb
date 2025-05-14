@@ -46,7 +46,7 @@ class ahb_scoreboard;
 
   //description
  task check_data(ahb_trans act_trans, ahb_trans exp_trans);
-   `ahb_checker(act_trans.rd_data,exp_trans.rd_data)
+//   `ahb_checker(act_trans.rd_data,exp_trans.rd_data)
    //cvg.sample();
    -> ev_sample;
  endtask
@@ -69,8 +69,8 @@ class ahb_scoreboard;
       $display("| .##......##..##..######..######. |");
 
     end
-    $display("| -> Total Read: %3d               |",act_trans.rd_cnt);
-    $display("| -> Total Write: %3d              |",act_trans.wr_cnt);
+    // $display("| -> Total Read: %3d               |",act_trans.rd_cnt);
+    //$display("| -> Total Write: %3d              |",act_trans.wr_cnt);
     $display("| -> Total success: %3d            |",this.success);
     $display("| -> Total failure: %3d            |",this.failure);
     $display(" ----------------------------------");

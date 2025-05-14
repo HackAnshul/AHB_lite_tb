@@ -1,19 +1,20 @@
 `ifndef AHB_TB_TOP_SV
 `define AHB_TB_TOP_SV
-`include "AHB_pkg.sv"
 
-module AHB_tb_top;
-  import AHB_pkg::*;
-// Base test instance
-  AHB_gen gen1;
-  AHB_base_test test;
+`include "ahb_pkg.sv"
+
+module ahb_tb_top;
+  import ahb_pkg::*;
+
   // Clock and reset
   logic hclk;
   logic hresetn;
 
   // AHB interface instance
-  AHB_if AHB_if_inst(hclk, hresetn);
+  ahb_inf vif (hclk, hresetn);
 
+  //base test
+  ahb_base_test test;
 
 
   // Clock generation
@@ -34,7 +35,7 @@ module AHB_tb_top;
       test.build();
 
     // Connect driver and monitor modports of interface to base test
-    test.connect(AHB_if_inst.MON_MP, AHB_if_inst.DRV_MP);
+    test.connect(vif.MON_MP, vif.DRV_MP);
     // Optionally run if needed
     //$display("Test running...");
     test.run();

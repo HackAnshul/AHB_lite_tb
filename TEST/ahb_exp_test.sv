@@ -3,12 +3,12 @@
 
 class ahb_exp_test extends ahb_gen;
    task run();
-    ram_pkg::raise_objection();
+    ahb_pkg::raise_objection();
     repeat(no_of_trans) begin
       `sv_do(trans_h)
     end
     #2.5;
-    ram_pkg::drop_objection();
+    ahb_pkg::drop_objection();
   endtask
 
 endclass

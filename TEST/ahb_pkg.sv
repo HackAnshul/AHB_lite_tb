@@ -1,6 +1,6 @@
 // guard statement to avoid multiple compilation of a file
-`ifndef RAM_PACKAGE_SV
-`define RAM_PACKAGE_SV
+`ifndef AHB_PACKAGE_SV
+`define AHB_PACKAGE_SV
 
 `include "ahb_defines.svh"
 `include "ahb_inf.sv"
