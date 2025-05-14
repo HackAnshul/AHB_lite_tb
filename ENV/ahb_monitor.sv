@@ -55,10 +55,10 @@ class ahb_monitor;
   endtask
 
   task wait_reset_release();
-    wait (vif.mon_cb.rst == 0);
+    wait (vif.mon_cb.hresetn == 0);
   endtask
   task wait_reset_assert();
-    wait (vif.mon_cb.rst == 1);
+    wait (vif.mon_cb.hresetn == 1);
   endtask
 
 

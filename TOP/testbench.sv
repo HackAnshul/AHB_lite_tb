@@ -31,11 +31,8 @@ module ahb_tb_top;
   // Instantiate and connect the testbench
   initial begin
     test = new();
-
-      test.build();
-
-    // Connect driver and monitor modports of interface to base test
-    test.connect(vif.MON_MP, vif.DRV_MP);
+    test.build();
+    test.connect(vif.DRV_MP, vif.MON_MP);
     // Optionally run if needed
     //$display("Test running...");
     test.run();

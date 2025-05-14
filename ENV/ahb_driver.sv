@@ -74,12 +74,12 @@ class ahb_driver;
     end
   endtask
 
-  task wait_reset_release();
-    wait (vif.drv_cb.HRESETn == 1);
-  endtask
-  task wait_reset_assert();
-    wait (vif.drv_cb.HRESETn == 0);
-  endtask
+  // task wait_reset_release();
+  //   wait (vif.drv_cb.hresetn == 1);
+  // endtask
+  // task wait_reset_assert();
+  //   wait (vif.drv_cb.hresetn == 0);
+  // endtask
 
  task run();
     trans_h = new();

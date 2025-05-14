@@ -18,6 +18,10 @@ sim_cov:
 	@echo "Running coverage with test $(TEST)"
 	vsim -coverage $(TOP)  -c -do "coverage save -onexit -directive -cvg -codeall cover.ucdb;run -all; exit;" +iter=$(ITR) $(TEST)
 
+sim_cmd:
+	@echo "Running sim with test $(TEST)"
+	vsim $(TOP)  -c -do "run -all; exit;" +iter=$(ITR) $(TEST)
+
 reg_sim:
 	mkdir -p log
 	mkdir -p cover
