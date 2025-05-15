@@ -30,27 +30,39 @@ class ahb_monitor;
   endfunction
 
 
-  task get_from_dut(ahb_trans item_collected);
+  task get_addr_phase();
+    @(vif.mon_cb iff vif.mon_cb.hreadyout);
+    case (vif.mon_cb.hburst)
+      3'b000:trans_h.hburst_e = SINGLE;
+      3'b001:trans_h.hburst_e = INCR;
+      3'b010:trans_h.hburst_e = WRAP4;
+      3'b011:trans_h.hburst_e = INCR4;
+      3'b100:trans_h.hburst_e = WRAP8;
+      3'b101:trans_h.hburst_e = INCR8;
+      3'b110:trans_h.hburst_e = WRAP16;
+      3'b111:trans_h.hburst_e = INCR16;
+    endcase
 
-    @(vif.mon_cb);
+    trans_h.hwrite = vif.drv_cb.hwrite;
+    trans_h.hsize  = vif.drv_cb.hsize;
+    trans_h.htrans = vif.drv_cb.htrans;
+
+  endtask
+  task get_from_dut(ahb_trans item_collected);
+    fork
+      get_addr_phase();
+      get_data_phase();
+    join_any
 //monitor logic
   endtask
 
   task run();
-    wait_reset_release();
     forever begin
-      fork
-        begin
-          trans_h=new();
-          get_from_dut(trans_h);
-          trans_h.print(trans_h,"Monitor");
-          mon2rf.put(trans_h);
-          mon2sb.put(trans_h);
-        end
-        wait_reset_assert();
-      join_any
-      disable fork;
-      wait_reset_release();
+      trans_h=new();
+      get_from_dut(trans_h);
+      trans_h.print(trans_h,"Monitor");
+      mon2rf.put(trans_h);
+      mon2sb.put(trans_h);
     end
   endtask
 
@@ -61,15 +73,6 @@ class ahb_monitor;
     wait (vif.mon_cb.hresetn == 1);
   endtask
 
-
-//  description
-//  task monitor();
-//    sample data from design
-//    create item_collected
-//    item_collected.wr_addr = vif.wmon_cb.wr_addr;
-//    item_collected.kind_e = kind'{vif.wmon_cb.wr_enb,vif.wmon_cb.rd_enb};
-//    $cast(item_collected.kind_e,{vif.wmon_cb.wr_enb,vif.wmon_cb.rd_enb});
-//  endtask
 
 endclass
 

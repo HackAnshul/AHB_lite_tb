@@ -31,7 +31,7 @@ class ahb_driver;
   endfunction
 
   //description
-  task drive_control_io(); //drives control signals of AHB
+  task drive_addr_phase(); //drives control signals of AHB
   $display("drive control");
     wait(addr_phase_que.size != 0)
     $display("wait is over addr");
@@ -58,7 +58,7 @@ class ahb_driver;
     end
   endtask
 
-  task drive_data_in();                               //drives the data signals
+  task drive_data_phase();        //drives the data signals
     $display("drive data");
 
     wait(data_phase_que.size != 0);
@@ -72,7 +72,7 @@ class ahb_driver;
 
     for(int i=0; i<trans_h3.calc_txf;i++) begin
       if(trans_h3.hwrite)
-        vif.drv_cb.hwdata <= trans_h3.hwdata;
+        vif.drv_cb.hwdata <= trans_h3.hwdata_que.pop_front();
       @(vif.drv_cb iff vif.drv_cb.hreadyout);
     end
     $display("drive data finish");
@@ -87,8 +87,8 @@ class ahb_driver;
 
   task send_to_dut;
     fork
-      drive_control_io();
-      drive_data_in();
+      drive_addr_phase();
+      drive_data_phase();
     join_any
   endtask
 
@@ -104,8 +104,6 @@ class ahb_driver;
         send_to_dut();
         trans_h.print(trans_h,"Driver");
       end
-      //drive_control_io();                       //drives the control signals of AHB
-      //drive_data_in();                          //drives the data signal of AHB
     join
   endtask
 endclass
