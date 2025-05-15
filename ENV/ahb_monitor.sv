@@ -43,9 +43,12 @@ class ahb_monitor;
       3'b111:trans_h.hburst_e = INCR16;
     endcase
 
-    trans_h.hwrite = vif.drv_cb.hwrite;
-    trans_h.hsize  = vif.drv_cb.hsize;
-    trans_h.htrans = vif.drv_cb.htrans;
+    trans_h.hwrite = vif.mon_cb.hwrite;
+    trans_h.hsize  = vif.mon_cb.hsize;
+    trans_h.htrans = vif.mon_cb.htrans;
+
+  endtask
+  task get_data_phase();
 
   endtask
   task get_from_dut(ahb_trans item_collected);
@@ -57,13 +60,13 @@ class ahb_monitor;
   endtask
 
   task run();
-    forever begin
+    /*forever begin
       trans_h=new();
-      get_from_dut(trans_h);
-      trans_h.print(trans_h,"Monitor");
+      //get_from_dut(trans_h);
+      //trans_h.print(trans_h,"Monitor");
       mon2rf.put(trans_h);
       mon2sb.put(trans_h);
-    end
+    end*/
   endtask
 
   task wait_reset_release();

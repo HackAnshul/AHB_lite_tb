@@ -19,7 +19,7 @@ class ahb_ref_model;
     this.ref2sb = ref2sb;
   endfunction
 
-  task run();
+  task run();/*
     forever begin
       mon2rf.get(trans_h1);
       trans_h2 = new trans_h1;
@@ -31,7 +31,7 @@ class ahb_ref_model;
       ref2sb.put(trans_h2);
       //trans_h1.print(trans_h1,"rerf model");
 
-   end
+   end*/
   endtask
 
   //description

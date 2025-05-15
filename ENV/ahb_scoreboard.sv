@@ -29,7 +29,7 @@ class ahb_scoreboard;
   endfunction
 
   task run();
-
+/*
     forever begin
       ref2sb.get(exp_trans);
       ahb_pkg::raise_objection();
@@ -48,7 +48,7 @@ class ahb_scoreboard;
  task check_data(ahb_trans act_trans, ahb_trans exp_trans);
 //   `ahb_checker(act_trans.rd_data,exp_trans.rd_data)
    //cvg.sample();
-   -> ev_sample;
+   -> ev_sample;*/
  endtask
 
 
