@@ -10,7 +10,7 @@
 `define RAM_SB_SV
 
 class ahb_scoreboard;
-  
+
   //take transation handles
   ahb_trans exp_trans,act_trans;
   int success;
