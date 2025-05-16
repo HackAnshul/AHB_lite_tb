@@ -30,33 +30,54 @@ class ahb_monitor;
   endfunction
 
 
-  task get_addr_phase();
-    @(vif.mon_cb iff vif.mon_cb.hreadyout);
+  task get_addr_phase(ahb_trans trans_h);
+    @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
     case (vif.mon_cb.hburst)
-      3'b000:trans_h.hburst_e = SINGLE;
-      3'b001:trans_h.hburst_e = INCR;
-      3'b010:trans_h.hburst_e = WRAP4;
-      3'b011:trans_h.hburst_e = INCR4;
-      3'b100:trans_h.hburst_e = WRAP8;
-      3'b101:trans_h.hburst_e = INCR8;
-      3'b110:trans_h.hburst_e = WRAP16;
-      3'b111:trans_h.hburst_e = INCR16;
+      3'b000:trans_h.hburst_e = hburst_e.SINGLE;
+      3'b001:trans_h.hburst_e = hburst_e.INCR;
+      3'b010:trans_h.hburst_e = hburst_e.WRAP4;
+      3'b011:trans_h.hburst_e = hburst_e.INCR4;
+      3'b100:trans_h.hburst_e = hburst_e.WRAP8;
+      3'b101:trans_h.hburst_e = hburst_e.INCR8;
+      3'b110:trans_h.hburst_e = hburst_e.WRAP16;
+      3'b111:trans_h.hburst_e = hburst_e.INCR16;
     endcase
 
     trans_h.hwrite = vif.mon_cb.hwrite;
+    trans_h.hsel = vif.mon_cb.hsel;
+    //trans_h.hresetn = vif.mon_cb.hresetn;
     trans_h.hsize  = vif.mon_cb.hsize;
     trans_h.htrans = vif.mon_cb.htrans;
+    trans_h.haddr_que.push_back(vif.mon_cb.haddr);
+
+    if (trans_h.calc_txf > 1) begin
+      for(int i=0; i < trans_h.calc_txf - 1; i++) begin
+        trans_h.haddr_que.push_back(vif.mon_cb.haddr);
+        trans_h.htrans = vif.drv_cb.htrans;
+end
+    end
 
   endtask
-  task get_data_phase();
+  task get_data_phase(ahb_trans trans_h);
+    repeat (2) @(vif.mon_cb iff vif.mon_cb.hreadyout);
+    if(vif.mon_cb.hwrite)
+      trans_h.hwdata_que.push_back(vif.mon_cb.hwdata);
+    else
+      trans_h.hrdata_que.push_back(vif.mon_cb.hrdata);
 
+    if (trans_h.calc_txf > 1) begin
+      for(int i=0; i < trans_h.calc_txf - 1; i++) begin
+        if(vif.mon_cb.hwrite)
+          trans_h.hwdata_que.push_back(vif.mon_cb.hwdata);
+        else
+          trans_h.hrdata_que.push_back(vif.mon_cb.hrdata);
+      end
   endtask
-  task get_from_dut(ahb_trans item_collected);
+  task get_from_dut(ahb_trans trans_h);
     fork
-      get_addr_phase();
-      get_data_phase();
+      get_addr_phase(trans_h);
+      get_data_phase(trans_h);
     join_any
-//monitor logic
   endtask
 
   task run();
