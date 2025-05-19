@@ -33,14 +33,14 @@ class ahb_monitor;
   task get_addr_phase(ahb_trans trans_h);
     @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
     case (vif.mon_cb.hburst)
-      3'b000:trans_h.hburst_e = hburst_e.SINGLE;
-      3'b001:trans_h.hburst_e = hburst_e.INCR;
-      3'b010:trans_h.hburst_e = hburst_e.WRAP4;
-      3'b011:trans_h.hburst_e = hburst_e.INCR4;
-      3'b100:trans_h.hburst_e = hburst_e.WRAP8;
-      3'b101:trans_h.hburst_e = hburst_e.INCR8;
-      3'b110:trans_h.hburst_e = hburst_e.WRAP16;
-      3'b111:trans_h.hburst_e = hburst_e.INCR16;
+      3'b000:trans_h.hburst_e = SINGLE;
+      3'b001:trans_h.hburst_e = INCR;
+      3'b010:trans_h.hburst_e = WRAP4;
+      3'b011:trans_h.hburst_e = INCR4;
+      3'b100:trans_h.hburst_e = WRAP8;
+      3'b101:trans_h.hburst_e = INCR8;
+      3'b110:trans_h.hburst_e = WRAP16;
+      3'b111:trans_h.hburst_e = INCR16;
     endcase
 
     trans_h.hwrite = vif.mon_cb.hwrite;
@@ -72,6 +72,7 @@ end
         else
           trans_h.hrdata_que.push_back(vif.mon_cb.hrdata);
       end
+    end
   endtask
   task get_from_dut(ahb_trans trans_h);
     fork
