@@ -36,7 +36,7 @@ class ahb_trans extends sv_sequence_item;
     $cast(lhs,rhs);
     $display("====================== %10s ====================== \@%0t ",block,$time);
     $display("| rst | sel | address | htrans | hwrite | hsize | hburst | hwdata | hrdata | hreadyout | hresp |");
-    $display("| %0d | %0d | %0d     | %0d    | %0d    | %0d   | %0s    |  %0d   |   %0d  | %0d       |  $0d  |",hresetn, hsel, haddr, htrans, hwrite, hsize, hburst_e, hwdata, hrdata, hreadyout, hresp);
+    $display("| %0d | %0d | %0d     | %0d    | %0d    | %0d   | %0s    |  %0d   |   %0d  | %0d       |  %0d  |",hresetn, hsel, haddr, htrans, hwrite, hsize, hburst_e, hwdata, hrdata, hreadyout, hresp);
   endfunction
 
   //function for calculating number of transfers in a transaction
