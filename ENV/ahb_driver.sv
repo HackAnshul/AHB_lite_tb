@@ -7,6 +7,7 @@
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
+
 `ifndef AHB_DRIVER_SV
 `define AHB_DRIVER_SV
 
@@ -38,11 +39,10 @@ task ahb_driver::run();
   fork
     repeat(20) begin
       gen2drv.get(trans_h);
-      trans_h.print(trans_h,"Driver");
       addr_phase_que.push_back(trans_h);
-      send_to_dut(trans_h);
       //trans_h.print("Driver");
     end
+    send_to_dut(trans_h);
   join
 endtask
 
@@ -83,6 +83,8 @@ task ahb_driver::drive_data_phase(ahb_trans trans_h); //drives the data signals
     @(vif.drv_cb);
     if(trans_h.hwrite)
       vif.drv_cb.hwdata <= trans_h.hwdata_que.pop_front(); //for the single burst type or first transfer of the burst type transaction
+
+    trans_h.print(trans_h,"Driver");
     if(trans_h.calc_txf) begin
       for(int i=0; i<trans_h.calc_txf -1;i++) begin
         @(vif.drv_cb /*iff vif.drv_cb.hreadyout*/);
@@ -92,5 +94,4 @@ task ahb_driver::drive_data_phase(ahb_trans trans_h); //drives the data signals
     end
   end
 endtask
-
 `endif
