@@ -6,22 +6,19 @@
 //                        //
 ////////////////////////////////////////////////////////////////////////
 
-`ifndef RAM_SB_SV
-`define RAM_SB_SV
+`ifndef AHB_SB_SV
+`define AHB_SB_SV
 
 class ahb_scoreboard;
 
-  //take transation handles
   ahb_trans exp_trans,act_trans;
   int success;
   int failure;
   event ev_sample;
 
-  //declare mailboxs
   mailbox #(ahb_trans) ref2sb;
   mailbox #(ahb_trans) mon2sb;
 
-  //take connect method
   function void connect ( mailbox #(ahb_trans) ref2sb,
                           mailbox #(ahb_trans) mon2sb);
     this.mon2sb = mon2sb;
@@ -29,26 +26,25 @@ class ahb_scoreboard;
   endfunction
 
   task run();
-/*
+
     forever begin
       ref2sb.get(exp_trans);
-      ahb_pkg::raise_objection();
+      //ahb_pkg::raise_objection();
       mon2sb.get(act_trans);
-      exp_trans.print(exp_trans,"expected");
-      act_trans.print(act_trans,"actual");
-
+      exp_trans.print("expected");
+      act_trans.print("actual");
       //compare act and exp and log the results
       check_data(act_trans,exp_trans);
-      #(`half_clk)
-      ahb_pkg::drop_objection();
+      //#(`half_clk)
+      //ahb_pkg::drop_objection();
     end
   endtask
 
-  //description
- task check_data(ahb_trans act_trans, ahb_trans exp_trans);
-//   `ahb_checker(act_trans.rd_data,exp_trans.rd_data)
-   //cvg.sample();
-   -> ev_sample;*/
+  task check_data(ahb_trans act_trans, ahb_trans exp_trans);
+    if(act_trans.hrdata_que = exp_trans.hrdata_que) begin
+
+    //-> ev_sample;
+
  endtask
 
 

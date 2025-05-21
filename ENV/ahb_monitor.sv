@@ -64,6 +64,7 @@ class ahb_monitor;
     trans_h.haddr_que.push_back(vif.mon_cb.haddr);
     if (trans_h.calc_txf > 1) begin
       for(int i=0; i < trans_h.calc_txf - 1; i++) begin
+        @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
         trans_h.haddr_que.push_back(vif.mon_cb.haddr);
         trans_h.htrans = vif.mon_cb.htrans;
       end
@@ -78,6 +79,7 @@ class ahb_monitor;
       trans_h.hrdata_que.push_back(vif.mon_cb.hrdata);
     if (trans_h.calc_txf > 1) begin
       for(int i=0; i < trans_h.calc_txf - 1; i++) begin
+        @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
         if(vif.mon_cb.hwrite)
           trans_h.hwdata_que.push_back(vif.mon_cb.hwdata);
         else

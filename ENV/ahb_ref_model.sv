@@ -2,40 +2,46 @@
 `define AHB_REF_MOD_SV
 class ahb_ref_model;
 
-  //take transation handles
   ahb_trans trans_h1,trans_h2;
 
-  //declare variables needed
-  bit [`DATA_WIDTH - 1:0] mem [`MEM_DEPTH - 1:0];
+  //reference memory
+  bit [`MEM_WIDTH - 1:0] mem [`MEM_DEPTH - 1:0];
 
-  //declare mailboxs
   mailbox #(ahb_trans) mon2rf;
   mailbox #(ahb_trans) ref2sb;
 
-  //take connect method
   function void connect (mailbox #(ahb_trans) mon2rf,
                          mailbox #(ahb_trans) ref2sb);
     this.mon2rf = mon2rf;
     this.ref2sb = ref2sb;
   endfunction
 
-  task run();/*
+  task run();
     forever begin
       mon2rf.get(trans_h1);
       trans_h2 = new trans_h1;
-      //trans_h1.print(trans_h1,"trans_h1");
-      //collect data from mailbox
-      predict_exp_rd_data(trans_h2);
-      //put transaction for scoboard
-      //$display("before putting");
+      predict_data(trans_h2);
       ref2sb.put(trans_h2);
-      //trans_h1.print(trans_h1,"rerf model");
+      trans_h2.print("ref model");
 
-   end*/
+   end
   endtask
 
-  //description
-  task predict_exp_rd_data(ahb_trans trans_h);
+  task predict_data(ahb_trans trans_h);
+
+    int addr_ext = 2**trans_h.hsize;
+    bit[`DATA_WIDTH-1:0] temp_data;
+    for (int i = 0; i< trans_h.calc_txf; i++) begin
+      if (trans_h.write) begin
+        temp_data = trans_h.hwdata_que.pop_front();
+        for (int j = 0; j < addr_ext; j++)
+          mem [trans_h.addr+j] = temp_data[(j*8)+:8];
+      end else begin
+        for (int j = 0; j < addr_ext; j++)
+          temp_data[(j*8)+:8] = mem [trans_h.addr+j];
+        trans_h.hrdata_que.push_back(temp_data);
+      end
+    end
   endtask
 
  endclass

@@ -43,7 +43,7 @@ class ahb_trans extends sv_sequence_item;
   function int calc_txf();
     case(this.hburst_e)
       SINGLE : return 1;
-      INCR : return 1;			//temporary value for INCR
+      INCR : return 1;
       WRAP4,INCR4: return 4;
       WRAP8,INCR8: return 8;
       WRAP16, INCR16: return 16;
