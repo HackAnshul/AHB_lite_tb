@@ -1,0 +1,116 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11f MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 d/home/anshul.p/projects/clone/AHB_lite_tb/SIM
+T_opt
+!s11d ahb_pkg /home/anshul.p/projects/clone/AHB_lite_tb/SIM/work 1 ahb_inf 1 /home/anshul.p/projects/clone/AHB_lite_tb/SIM/work 
+!s110 1747805914
+VjhbDHX5F[og]EmGgmCjzz3
+04 10 4 work ahb_tb_top fast 0
+=1-bc305bf5d1c4-682d66da-bcaf4-28bb
+R0
+!s12f OEM100
+!s12b OEM100
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2023.4;77
+Yahb_inf
+Z3 2../RTL/design.sv|../TEST/ahb_pkg.sv|../TOP/testbench.sv
+Z4 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z5 !s110 1747805907
+!i10b 1
+!s100 Dk:?aFSBW1Nh4CWHm[WPE3
+I?GiLD]T9ANaHgDZ2O5EMZ1
+S1
+R1
+w1747802648
+8../ENV/ahb_inf.sv
+F../ENV/ahb_inf.sv
+!i122 1
+L0 12 0
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z7 OL;L;2023.4;77
+r1
+!s85 0
+31
+Z8 !s108 1747805907.000000
+Z9 !s107 ../TEST/ahb_base_test.sv|../ENV/ahb_env.sv|../ENV/ahb_scoreboard.sv|../ENV/ahb_ref_model.sv|../ENV/ahb_monitor.sv|../ENV/ahb_driver.sv|../ENV/ahb_gen.sv|../ENV/ahb_config.sv|../ENV/ahb_trans.sv|../ENV/sv_sequence_item.sv|../ENV/ahb_inf.sv|../ENV/ahb_defines.svh|../TOP/testbench.sv|../TEST/ahb_pkg.sv|../RTL/design.sv|
+Z10 !s90 +incdir+../ENV|+incdir+../TEST|../RTL/design.sv|../TEST/ahb_pkg.sv|../TOP/testbench.sv|
+!i113 0
+Z11 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z12 !s92 +incdir+../ENV +incdir+../TEST -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+Xahb_pkg
+R3
+!s115 ahb_inf
+R4
+R5
+!i10b 1
+!s100 k:EBin?1JZ`KRL>gHJM`S0
+Imn=0W<SYe^`Ij>j3:k4D40
+S1
+R1
+w1747805820
+F../TEST/ahb_pkg.sv
+F../ENV/sv_sequence_item.sv
+F../ENV/ahb_trans.sv
+F../ENV/ahb_config.sv
+F../ENV/ahb_gen.sv
+F../ENV/ahb_driver.sv
+F../ENV/ahb_monitor.sv
+F../ENV/ahb_ref_model.sv
+F../ENV/ahb_scoreboard.sv
+F../ENV/ahb_env.sv
+F../TEST/ahb_base_test.sv
+!i122 1
+L0 8 0
+Vmn=0W<SYe^`Ij>j3:k4D40
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R12
+R2
+vahb_tb_top
+R3
+R4
+DXx4 work 7 ahb_pkg 0 22 mn=0W<SYe^`Ij>j3:k4D40
+R5
+!i10b 1
+!s100 z2Y_1FGY=VQodJ8TG1lT33
+I599L6iaa579D;fNi?[IEi1
+S1
+R1
+w1747736555
+8../TOP/testbench.sv
+F../TOP/testbench.sv
+!i122 1
+L0 6 39
+R6
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 0
+R11
+R12
+R2

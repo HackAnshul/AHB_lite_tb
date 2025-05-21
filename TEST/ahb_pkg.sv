@@ -29,6 +29,7 @@ package ahb_pkg;
 
   `include "sv_sequence_item.sv"
   `include "ahb_trans.sv"
+  `include "ahb_config.sv"
   `include "ahb_gen.sv"
   `include "ahb_driver.sv"
   `include "ahb_monitor.sv"
@@ -38,7 +39,6 @@ package ahb_pkg;
   //add all file till test, don't miss the order
 
   //testcases
-  `include "ahb_exp_test.sv"
   `include "ahb_base_test.sv"
 
 endpackage

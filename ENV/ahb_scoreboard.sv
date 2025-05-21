@@ -52,7 +52,7 @@ class ahb_scoreboard;
  endtask
 
 
-  function void print_sb();
+  function void print_sb();/*
     $display(" ----------------------------------");
     if ((this.success > 0) && (this.failure < 5)) begin
       $display("| .#####....####....####....####.. |");
@@ -74,7 +74,7 @@ class ahb_scoreboard;
     $display("| -> Total success: %3d            |",this.success);
     $display("| -> Total failure: %3d            |",this.failure);
     $display(" ----------------------------------");
-
+*/
   endfunction
 
  endclass

@@ -20,7 +20,7 @@ sim_cov:
 
 sim_cmd:
 	@echo "Running sim with test $(TEST)"
-	vsim $(TOP)  -c -do "run -all; exit;" +iter=$(ITR) $(TEST)
+	vsim -voptargs=+acc $(TOP)  -c -do "run -all; exit;" +iter=$(ITR) $(TEST)
 
 reg_sim:
 	mkdir -p log

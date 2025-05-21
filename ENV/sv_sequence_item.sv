@@ -10,7 +10,7 @@ virtual class sv_sequence_item;
   virtual function void copy(sv_sequence_item rhs);
   endfunction
 
-  pure virtual function void print(sv_sequence_item rhs, string block);
+  pure virtual function void print(string block);
 
 
 endclass

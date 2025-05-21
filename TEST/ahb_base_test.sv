@@ -10,7 +10,7 @@ class ahb_base_test;
   ahb_env env;
 
   //testcases
-  ahb_exp_test exp;
+  //ahb_exp_test exp;
   ////////////
 
   // declare all interface
@@ -22,15 +22,15 @@ class ahb_base_test;
                         virtual ahb_inf.MON_MP mvif);
     this.vif = vif;
     this.mvif = mvif;
-    env.connect(vif,mvif);
+    env.connect(mvif,vif);
   endfunction
 
   //create environment and call its methods here as needed
   function void build();
     env = new();
     env.build();
-    void'($value$plusargs("iter=%d",itr));
-    `sv_do_on_with(EXP_TEST, exp, {no_of_trans == itr;})
+    //void'($value$plusargs("iter=%d",itr));
+    //`sv_do_on_with(EXP_TEST, exp, {no_of_trans == itr;})
   endfunction
 
 
@@ -39,9 +39,9 @@ class ahb_base_test;
     env.run();
   endtask
 
-  function print_sb();
+ /* function print_sb();
     env.print_sb();
-  endfunction
+  endfunction*/
 
 endclass
 

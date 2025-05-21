@@ -38,7 +38,7 @@ module ahb_tb_top;
     // Optionally run if needed
     //$display("Test running...");
     test.run();
-    #100 $finish;
+    #1000 $finish;
   end
 
 endmodule

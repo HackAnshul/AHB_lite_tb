@@ -15,7 +15,7 @@
 `define ADDR_WIDTH 12
 `define DATA_WIDTH 32
 `define MEM_WIDTH 8
-`define DEPTH 4096
+`define MEM_DEPTH 4096
 
 
 `define half_clk 2.5
@@ -55,6 +55,6 @@
     $error("Failed");\
   end
 
-typedef enum bit [1:0] {IDLE, READ, WRITE, SIM_RW} trans_kind;
+//typedef enum bit [1:0] {IDLE, READ, WRITE, SIM_RW} trans_kind;
 
 `endif

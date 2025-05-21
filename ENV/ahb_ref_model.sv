@@ -6,7 +6,7 @@ class ahb_ref_model;
   ahb_trans trans_h1,trans_h2;
 
   //declare variables needed
-  bit [`DATA_WIDTH - 1:0] mem [`DEPTH - 1:0];
+  bit [`DATA_WIDTH - 1:0] mem [`MEM_DEPTH - 1:0];
 
   //declare mailboxs
   mailbox #(ahb_trans) mon2rf;
