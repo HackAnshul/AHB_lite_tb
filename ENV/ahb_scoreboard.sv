@@ -42,7 +42,10 @@ class ahb_scoreboard;
 
   task check_data(ahb_trans act_trans, ahb_trans exp_trans);
     if(act_trans.hrdata_que = exp_trans.hrdata_que) begin
-
+      success++;
+    end else begin
+      failure++;
+    end
     //-> ev_sample;
 
  endtask

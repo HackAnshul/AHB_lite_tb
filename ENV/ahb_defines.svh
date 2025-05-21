@@ -12,7 +12,7 @@
 `define AHB_DEFINES_SV
 //typedef RAM_DEFINES_SV
 
-`define ADDR_WIDTH 12
+`define ADDR_WIDTH 32
 `define DATA_WIDTH 32
 `define MEM_WIDTH 8
 `define MEM_DEPTH 4096

@@ -11,8 +11,24 @@ module ahb_tb_top;
   logic hresetn;
 
   // AHB interface instance
-  ahb_inf vif (hclk, hresetn);
+  ahb_inf inf (hclk, hresetn);
 
+  ahb3liten DUT (
+    .HRESETn(hresetn),
+    .HCLK(hclk),
+    .HSEL(inf.hsel),
+    .HADDR(inf.haddr),
+    .HWDATA(inf.hwdata),
+    .HRDATA(inf.hrdata),
+    .HWRITE(inf.hwrite),
+    .HSIZE(inf.hsize),
+    .HBURST(inf.hburst),
+    .HPROT(inf.hprot),
+    .HTRANS(inf.htrans),
+    .HREADYOUT(inf.hreadyout),
+    .HREADY(inf.hready),
+    .HRESP(inf.hresp)
+  );
   //base test
   ahb_base_test test;
 
@@ -34,7 +50,7 @@ module ahb_tb_top;
   initial begin
     test = new();
     test.build();
-    test.connect(vif.DRV_MP, vif.MON_MP);
+    test.connect(inf.DRV_MP, inf.MON_MP);
     // Optionally run if needed
     //$display("Test running...");
     test.run();
