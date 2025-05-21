@@ -37,10 +37,10 @@ class ahb_driver;
     vif.drv_cb.haddr <= trans_h2.haddr_que.pop_front();
 
     if(trans_h2.calc_txf > 1) begin                             //for burst type transfers
-      for(int i = 0; i < trans_h2.calc_txf -1; i++) begin
+      for(int i = 1; i < trans_h2.calc_txf -1; i++) begin
+        @(vif.drv_cb);
         vif.drv_cb.haddr <= trans_h2.haddr_que.pop_front();
         vif.drv_cb.htrans <= trans_h2.htrans;
-        @(vif.drv_cb);
       end
     end
   endtask
@@ -54,10 +54,10 @@ class ahb_driver;
       vif.drv_cb.hwdata <= trans_h3.hwdata_que.pop_front();                 //for the single burst type or first transfer of the burst type transaction
 
     if(trans_h3.calc_txf) begin
-      for(int i=0; i<trans_h3.calc_txf -1;i++) begin
+      for(int i=1; i<trans_h3.calc_txf -1;i++) begin
+        @(vif.drv_cb);
         if(trans_h3.hwrite)
           vif.drv_cb.hwdata <= trans_h3.hwdata_que.pop_front();
-        @(vif.drv_cb);
       end
     end
   endtask
