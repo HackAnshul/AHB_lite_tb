@@ -57,7 +57,7 @@ class ahb_monitor;
       3'b111:trans_h.hburst_e = INCR16;
     endcase
     trans_h.hwrite = vif.mon_cb.hwrite;
-    trans_h.hsel = vif.mon_cb.hsel;
+    //trans_h.hsel = vif.mon_cb.hsel;
     //trans_h.hresetn = vif.mon_cb.hresetn;
     trans_h.hsize  = vif.mon_cb.hsize;
     trans_h.htrans = vif.mon_cb.htrans;
