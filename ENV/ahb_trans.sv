@@ -14,7 +14,7 @@ class ahb_trans extends sv_sequence_item;
   //bit[2:0]hburst;                 //burst type
   rand bit [`DATA_WIDTH-1:0]hwdata; //write data
   //slave output signals
-  bit [31:0]hrdata;             //read data
+  bit [`DATA_WIDTH-1:0]hrdata;      //read data
   bit hready;                   //transfer status signal
   bit[1:0] hresp;               //response signal
   rand burst_type hburst_e;     //hburst_type enum
@@ -25,7 +25,10 @@ class ahb_trans extends sv_sequence_item;
   rand bit [`DATA_WIDTH-1 :0]hwdata_arr[];			//write data
   bit [`DATA_WIDTH-1 :0]hrdata_arr[];			//read data
 
+
+  //local variables for generating data
   local rand int limit;
+  local rand int undef_incr;
 
   constraint hsize_range {hsize inside {[0:2]};}
   constraint read_exc {
@@ -39,9 +42,27 @@ class ahb_trans extends sv_sequence_item;
   }
 
   constraint arr_sizes {
-    haddr_arr.size() == calc_txf();
-    hwdata_arr.size() == calc_txf();
+    if(hburst_e == SINGLE) haddr_arr.size() == 1;
+    else if (hburst_e == WRAP4) haddr_arr.size() == 4;
+    else if (hburst_e == INCR4) haddr_arr.size() == 4;
+    else if (hburst_e == WRAP8) haddr_arr.size() == 8;
+    else if (hburst_e == INCR8) haddr_arr.size() == 8;
+    else if (hburst_e == WRAP16) haddr_arr.size() == 16;
+    else if (hburst_e == INCR16) haddr_arr.size() == 16;
+
+    if(hburst_e == SINGLE) hwdata_arr.size() == 1;
+    else if (hburst_e == WRAP4) hwdata_arr.size() == 4;
+    else if (hburst_e == INCR4) hwdata_arr.size() == 4;
+    else if (hburst_e == WRAP8) hwdata_arr.size() == 8;
+    else if (hburst_e == INCR8) hwdata_arr.size() == 8;
+    else if (hburst_e == WRAP16) hwdata_arr.size() == 16;
+    else if (hburst_e == INCR16) hwdata_arr.size() == 16;
+
+    if (hburst_e == INCR) undef_incr inside {[1:25]}; //temporarily
+    hwdata_arr.size() == undef_incr;
+    haddr_arr.size() == undef_incr;
   }
+//     hwdata_arr.size() == calc_txf();
 
   //constraint align_address {haddr % (1 << hsize) == 0;}
   constraint align_addr {
@@ -59,9 +80,12 @@ class ahb_trans extends sv_sequence_item;
 
 //write a constraint for 1kb limit
   function void print(string block);
-    $display("====================== %10s ====================== \@%0t ",block,$time);
-    $display("| address | htrans | hwrite | hsize | hburst | hwdata | hrdata | hresp |");
-    $display("| %p     | %0d    | %0d    | %0d   | %s    |  %p   |   %p  |  %0d  |", haddr_arr, htrans, hwrite, hsize, hburst_e.name, hwdata_arr, hrdata_arr, hresp);
+    $display("===================== %10s ===================== \@%0t ",block,$time);
+    $display("address : %p",haddr_arr);
+    $display("W_data : %p",hwdata_arr);
+    $display("R_data : %p",hrdata_arr);
+    $display("|  htrans | hwrite | hsize | hburst | hresp |");
+    $display("|  %0d    | %0d    | %0d   |%5s| %0d   |", haddr_arr, htrans, hwrite, hsize, hburst_e.name, hwdata_arr, hrdata_arr, hresp);
   endfunction
 
   //function for calculating number of transfers in a transaction
