@@ -33,13 +33,14 @@ class ahb_ref_model;
     bit[`DATA_WIDTH-1:0] temp_data;
     for (int i = 0; i< trans_h.calc_txf; i++) begin
       if (trans_h.hwrite) begin
-        temp_data = trans_h.hwdata_que.pop_front();
+        temp_data = trans_h.hwdata_arr[i];
         for (int j = 0; j < addr_ext; j++)
           mem [trans_h.haddr+j] = temp_data[(j*8)+:8];
-      end else begin
+      end
+      else begin
         for (int j = 0; j < addr_ext; j++)
           temp_data[(j*8)+:8] = mem [trans_h.haddr+j];
-        trans_h.hrdata_que.push_back(temp_data);
+        trans_h.hrdata_arr[i] = temp_data;
       end
     end
   endtask

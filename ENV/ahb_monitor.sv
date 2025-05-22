@@ -57,15 +57,15 @@ class ahb_monitor;
       3'b111:trans_h.hburst_e = INCR16;
     endcase
     trans_h.hwrite = vif.mon_cb.hwrite;
-    //trans_h.hsel = vif.mon_cb.hsel;
+    trans_h.hsel = vif.mon_cb.hsel;
     //trans_h.hresetn = vif.mon_cb.hresetn;
     trans_h.hsize  = vif.mon_cb.hsize;
     trans_h.htrans = vif.mon_cb.htrans;
-    trans_h.haddr_que.push_back(vif.mon_cb.haddr);
+    trans_h.haddr_arr[0] = vif.mon_cb.haddr;
     if (trans_h.calc_txf > 1) begin
-      for(int i=0; i < trans_h.calc_txf - 1; i++) begin
+      for(int i=1; i < trans_h.calc_txf - 1; i++) begin
         @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
-        trans_h.haddr_que.push_back(vif.mon_cb.haddr);
+        trans_h.haddr_arr[i] = vif.mon_cb.haddr;
         trans_h.htrans = vif.mon_cb.htrans;
       end
     end
@@ -74,16 +74,16 @@ class ahb_monitor;
   task get_data_phase(ahb_trans trans_h);
     repeat (2) @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
     if(vif.mon_cb.hwrite)
-      trans_h.hwdata_que.push_back(vif.mon_cb.hwdata);
+      trans_h.hwdata_arr[0] = vif.mon_cb.hwdata;
     else
-      trans_h.hrdata_que.push_back(vif.mon_cb.hrdata);
+      trans_h.hrdata_arr[0] = vif.mon_cb.hrdata;
     if (trans_h.calc_txf > 1) begin
-      for(int i=0; i < trans_h.calc_txf - 1; i++) begin
+      for(int i=1; i < trans_h.calc_txf - 1; i++) begin
         @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
         if(vif.mon_cb.hwrite)
-          trans_h.hwdata_que.push_back(vif.mon_cb.hwdata);
+          trans_h.hwdata_arr[i] = vif.mon_cb.hwdata;
         else
-          trans_h.hrdata_que.push_back(vif.mon_cb.hrdata);
+          trans_h.hrdata_arr[i] = vif.mon_cb.hrdata;
       end
     end
   endtask
