@@ -61,7 +61,7 @@ class ahb_trans extends sv_sequence_item;
   function void print(string block);
     $display("====================== %10s ====================== \@%0t ",block,$time);
     $display("| address | htrans | hwrite | hsize | hburst | hwdata | hrdata | hresp |");
-    $display("| %p     | %0d    | %0d    | %0d   | %s    |  %p   |   %p  |  %0d  |", haddr_que, htrans, hwrite, hsize, hburst_e.name, hwdata_que, hrdata_que, hresp);
+    $display("| %p     | %0d    | %0d    | %0d   | %s    |  %p   |   %p  |  %0d  |", haddr_arr, htrans, hwrite, hsize, hburst_e.name, hwdata_arr, hrdata_arr, hresp);
   endfunction
 
   //function for calculating number of transfers in a transaction
