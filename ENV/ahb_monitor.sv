@@ -60,13 +60,13 @@ class ahb_monitor;
     //trans_h.hsel = vif.mon_cb.hsel;
     //trans_h.hresetn = vif.mon_cb.hresetn;
     trans_h.hsize  = vif.mon_cb.hsize;
-    trans_h.htrans = vif.mon_cb.htrans;
+    trans_h.htrans[0] = vif.mon_cb.htrans;
     trans_h.haddr_arr[0] = vif.mon_cb.haddr;
     if (trans_h.calc_txf > 1) begin
       for(int i=1; i < trans_h.calc_txf - 1; i++) begin
         @(vif.mon_cb /*iff vif.mon_cb.hreadyout*/);
         trans_h.haddr_arr[i] = vif.mon_cb.haddr;
-        trans_h.htrans = vif.mon_cb.htrans;
+        trans_h.htrans[i] = vif.mon_cb.htrans;
       end
     end
   endtask
