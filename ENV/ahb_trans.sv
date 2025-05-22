@@ -49,7 +49,7 @@ class ahb_trans extends sv_sequence_item;
   }
   constraint wdata_values{
     foreach(hwdata[i]) {
-      limit  == (2**(8*(hsize+1)) -> hwdata[i] inside {[0:limit-1]};
+      limit  == (2**(8*(hsize+1))) -> hwdata[i] inside {[0:limit-1]};
     }
   }
 
