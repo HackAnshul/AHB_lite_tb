@@ -17,12 +17,12 @@ class ahb_ref_model;
   endfunction
 
   task run();
-    forever begin
+    repeat(20) begin
       mon2rf.get(trans_h1);
       trans_h2 = new trans_h1;
       predict_data(trans_h2);
       ref2sb.put(trans_h2);
-      trans_h2.print("ref model");
+      //trans_h2.print("ref model");
 
    end
   endtask
@@ -32,13 +32,13 @@ class ahb_ref_model;
     int addr_ext = 2**trans_h.hsize;
     bit[`DATA_WIDTH-1:0] temp_data;
     for (int i = 0; i< trans_h.calc_txf; i++) begin
-      if (trans_h.write) begin
+      if (trans_h.hwrite) begin
         temp_data = trans_h.hwdata_que.pop_front();
         for (int j = 0; j < addr_ext; j++)
-          mem [trans_h.addr+j] = temp_data[(j*8)+:8];
+          mem [trans_h.haddr+j] = temp_data[(j*8)+:8];
       end else begin
         for (int j = 0; j < addr_ext; j++)
-          temp_data[(j*8)+:8] = mem [trans_h.addr+j];
+          temp_data[(j*8)+:8] = mem [trans_h.haddr+j];
         trans_h.hrdata_que.push_back(temp_data);
       end
     end

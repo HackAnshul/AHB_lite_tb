@@ -27,7 +27,7 @@ class ahb_scoreboard;
 
   task run();
 
-    forever begin
+    repeat(20) begin
       ref2sb.get(exp_trans);
       //ahb_pkg::raise_objection();
       mon2sb.get(act_trans);
@@ -41,7 +41,7 @@ class ahb_scoreboard;
   endtask
 
   task check_data(ahb_trans act_trans, ahb_trans exp_trans);
-    if(act_trans.hrdata_que = exp_trans.hrdata_que) begin
+    if(act_trans.hrdata_que == exp_trans.hrdata_que) begin
       success++;
     end else begin
       failure++;

@@ -29,7 +29,7 @@ class ahb_driver;
 
     wait(addr_phase_que.size != 0);                         //checking if the addr phase data present or not
     trans_h2=addr_phase_que.pop_front();
-   // vif.drv_cb.hsel <= trans_h2.hsel;
+    vif.drv_cb.hsel <= 1'b1;
     vif.drv_cb.hwrite <= trans_h2.hwrite;
     vif.drv_cb.hsize <= trans_h2.hsize;
     vif.drv_cb.hburst <= int'(trans_h2.hburst_e);

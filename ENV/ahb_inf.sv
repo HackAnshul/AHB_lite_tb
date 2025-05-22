@@ -8,6 +8,7 @@
 
 `ifndef AHB_INF_SV
 `define AHB_INF_SV
+`timescale 1ns/1ns
 
 interface ahb_inf(input logic hclk, input logic hresetn);
 
@@ -20,9 +21,10 @@ interface ahb_inf(input logic hclk, input logic hresetn);
   logic [3:0]  hprot;
   logic        hsel;
   logic        hready;
+  logic        hreadyout;
   logic [`DATA_WIDTH-1:0] hwdata;
   logic [`DATA_WIDTH-1:0] hrdata;
-  logic [1:0]  hresp;
+  logic        hresp;
 
 
  clocking drv_cb @(posedge hclk);
