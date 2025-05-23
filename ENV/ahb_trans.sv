@@ -7,12 +7,12 @@ typedef enum bit[2:0] {SINGLE, INCR, WRAP4, INCR4, WRAP8, INCR8, WRAP16, INCR16}
 
 class ahb_trans extends sv_sequence_item;
 
-  bit [1:0] htrans[];                   //transaction type
+  bit [1:0] htrans[$];                   //transaction type
   rand bit hwrite;                   //!read/write
   rand bit[2:0] hsize;             //transfer data width
   //bit[2:0]hburst;                 //burst type
   rand burst_type hburst_e;     //hburst_type enum
-  bit [3:0] hprot
+  bit [3:0] hprot;
 
   //slave output signals
   bit hready;                   //transfer status signal
@@ -20,10 +20,10 @@ class ahb_trans extends sv_sequence_item;
 
 
   //array for storing addresses of the burst transaction
-  rand bit [`ADDR_WIDTH-1: 0] haddr_arr[];
+  rand bit [`ADDR_WIDTH-1: 0] haddr_arr[$];
   //array for storing write data and read data
-  rand bit [`DATA_WIDTH-1 :0]hwdata_arr[];			//write data
-  bit [`DATA_WIDTH-1 :0]hrdata_arr[];			//read data
+  rand bit [`DATA_WIDTH-1 :0]hwdata_arr[$];			//write data
+  bit [`DATA_WIDTH-1 :0]hrdata_arr[$];			//read data
 
 
   //local variables for generating data
@@ -61,8 +61,8 @@ class ahb_trans extends sv_sequence_item;
     haddr_arr[0] % (1 << hsize) == 0;
   }
   constraint wdata_values{
-    foreach(hwdata[i]) {
-      limit  == (2**(8*(hsize+1))) -> hwdata[i] inside {[0:limit-1]};
+    foreach(hwdata_arr[i]) {
+      limit  == (2**(8*(hsize+1))) -> hwdata_arr[i] inside {[0:limit-1]};
     }
   }
 
@@ -73,11 +73,12 @@ class ahb_trans extends sv_sequence_item;
 //write a constraint for 1kb limit
   function void print(string block);
     $display("===================== %10s ===================== \@%0t ",block,$time);
-    $display("address : %p",haddr_arr);
-    $display("W_data : %p",hwdata_arr);
-    $display("R_data : %p",hrdata_arr);
-    $display("|  htrans | hwrite | hsize | hburst | hresp |");
-    $display("|  %0d    | %0d    | %0d   |%5s| %0d   |", haddr_arr, htrans, hwrite, hsize, hburst_e.name, hwdata_arr, hrdata_arr, hresp);
+    $display("haddr  : %p",haddr_arr);
+    $display("hwdata : %p",hwdata_arr);
+    $display("hrdata : %p",hrdata_arr);
+    $display("htrans : %p",htrans);
+    $display("| hwrite | hsize |  hburst  | hresp |");
+    $display("| %0d    | %0d   |%6s | %0d   |", hwrite, hsize, hburst_e.name, hresp);
   endfunction
 
   //function for calculating number of transfers in a transaction
@@ -97,16 +98,15 @@ class ahb_trans extends sv_sequence_item;
       haddr_arr[i] = haddr_arr[i-1] + (2**hsize);
     end
 
-    htrans = new [length];
-    htrans[0] = 2'b10;
-    if (hburst_e == INCR) begin
-      htrans[length-1] = 2'b10;
-      for (int i = 1; i< length -1; i++)
-        htrans[i] = 2'b11;
-    end else begin
-      for (int i = 1; i< length; i++)
-        htrans[i] = 2'b11;
-    end
+    //htrans = new [length];
+    //htrans[0] = 2'b10;
+    htrans.push_back(2'b10);
+    for (int i = 1; i< length -1; i++)
+      htrans.push_back(2'b11);
+    if (hburst_e == INCR)
+      htrans.push_back(2'b10);
+    else
+      htrans.push_back(2'b11);
 
   endfunction
 endclass
