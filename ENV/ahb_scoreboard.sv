@@ -41,7 +41,7 @@ class ahb_scoreboard;
   endtask
 
   task check_data(ahb_trans act_trans, ahb_trans exp_trans);
-    if(act_trans.hrdata_arr == exp_trans.hrdata_arr) begin
+    if(act_trans.hrdata == exp_trans.hrdata) begin
       success++;
     end else begin
       failure++;

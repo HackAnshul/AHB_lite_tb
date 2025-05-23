@@ -20,10 +20,10 @@ class ahb_trans extends sv_sequence_item;
 
 
   //array for storing addresses of the burst transaction
-  rand bit [`ADDR_WIDTH-1: 0] haddr_arr[$];
+  rand bit [`ADDR_WIDTH-1: 0] haddr[$];
   //array for storing write data and read data
-  rand bit [`DATA_WIDTH-1 :0]hwdata_arr[$];			//write data
-  bit [`DATA_WIDTH-1 :0]hrdata_arr[$];			//read data
+  rand bit [`DATA_WIDTH-1 :0]hwdata[$];			//write data
+  bit [`DATA_WIDTH-1 :0]hrdata[$];			//read data
 
 
   //local variables for generating data
@@ -32,17 +32,17 @@ class ahb_trans extends sv_sequence_item;
 
   constraint hsize_range {hsize inside {[0:2]};}
   constraint read_exc {
-    hwrite == 0 -> foreach(hwdata_arr[i]){ hwdata_arr[i] == 0; }
+    hwrite == 0 -> foreach(hwdata[i]){ hwdata[i] == 0; }
   }
   constraint priority_c {
     solve hburst_e before hsize; // for 1kb limit
-    solve hburst_e before haddr_arr;
-    solve hburst_e before hwdata_arr;
-    solve hwrite before hwdata_arr;
+    solve hburst_e before haddr;
+    solve hburst_e before hwdata;
+    solve hwrite before hwdata;
   }
 
   constraint arr_sizes {
-    if(hburst_e == SINGLE) haddr_arr.size() == 1;
+    if(hburst_e == SINGLE) haddr.size() == 1;
     if (hburst_e == WRAP4) length  == 4;
     if (hburst_e == INCR4) length == 4;
     if (hburst_e == WRAP8) length == 8;
@@ -51,18 +51,18 @@ class ahb_trans extends sv_sequence_item;
     if (hburst_e == INCR16) length == 16;
     if (hburst_e == INCR) length inside {[1:25]}; //temporarily
 
-    hwdata_arr.size() == length;
-    haddr_arr.size() == length;
+    hwdata.size() == length;
+    haddr.size() == length;
   }
-//     hwdata_arr.size() == calc_txf();
+//     hwdata.size() == calc_txf();
 
   //constraint align_address {haddr % (1 << hsize) == 0;}
   constraint align_addr {
-    haddr_arr[0] % (1 << hsize) == 0;
+    haddr[0] % (1 << hsize) == 0;
   }
   constraint wdata_values{
-    foreach(hwdata_arr[i]) {
-      limit  == (2**(8*(hsize+1))) -> hwdata_arr[i] inside {[0:limit-1]};
+    foreach(hwdata[i]) {
+      limit  == (2**(8*(hsize+1))) -> hwdata[i] inside {[0:limit-1]};
     }
   }
 
@@ -73,9 +73,9 @@ class ahb_trans extends sv_sequence_item;
 //write a constraint for 1kb limit
   function void print(string block);
     $display("===================== %10s ===================== \@%0t ",block,$time);
-    $display("haddr  : %p",haddr_arr);
-    $display("hwdata : %p",hwdata_arr);
-    $display("hrdata : %p",hrdata_arr);
+    $display("haddr  : %p",haddr);
+    $display("hwdata : %p",hwdata);
+    $display("hrdata : %p",hrdata);
     $display("htrans : %p",htrans);
     $display("| hwrite | hsize |  hburst  | hresp |");
     $display("| %0d    | %0d   |%6s | %0d   |", hwrite, hsize, hburst_e.name, hresp);
@@ -94,8 +94,8 @@ class ahb_trans extends sv_sequence_item;
 
 
   function void post_randomize();
-    for (int i=1; i < haddr_arr.size; i++) begin
-      haddr_arr[i] = haddr_arr[i-1] + (2**hsize);
+    for (int i=1; i < haddr.size; i++) begin
+      haddr[i] = haddr[i-1] + (2**hsize);
     end
 
     //htrans = new [length];
