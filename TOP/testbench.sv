@@ -25,8 +25,8 @@ module ahb_tb_top;
     .HBURST(inf.hburst),
     .HPROT(inf.hprot),
     .HTRANS(inf.htrans),
-    .HREADYOUT(inf.hreadyout),
-    .HREADY(inf.hready),
+    .HREADYOUT(inf.hready),
+    .HREADY(1),
     .HRESP(inf.hresp)
   );
   //base test
@@ -53,6 +53,7 @@ module ahb_tb_top;
     test.connect(inf.DRV_MP, inf.MON_MP);
     // Optionally run if needed
     //$display("Test running...");
+    ahb_config::set_pipeline(1);
     test.run();
     #1000 $finish;
   end

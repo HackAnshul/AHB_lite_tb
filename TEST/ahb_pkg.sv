@@ -39,6 +39,8 @@ package ahb_pkg;
   //add all file till test, don't miss the order
 
   //testcases
+  `include "ahb_write_read.sv"
+  `include "ahb_back_to_back.sv"
   `include "ahb_base_test.sv"
 
 endpackage

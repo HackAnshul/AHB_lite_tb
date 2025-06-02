@@ -17,7 +17,7 @@ class ahb_gen;
     this.gen2drv = gen2drv;
   endfunction
 
-  task run();
+  pure task run();/*
   repeat(20) begin
     trans_h =new();
     trans_copy = new trans_h;
@@ -26,7 +26,7 @@ class ahb_gen;
     trans_h.print("Generator");
     // #10;
     end
-  endtask
+  endtask*/
 
 endclass
 `endif
