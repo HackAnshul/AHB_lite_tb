@@ -47,14 +47,14 @@ task run();
     end
   endtask
 
-  task send_to_dut(AHB_trans trans_h);
+  task send_to_dut(ahb_trans trans_h);
     fork
       drive_control_signals(trans_h);
       drive_data_signals(trans_h);
     join_any
   endtask
 
-  task drive_control_signals(AHB_trans trans_h); 				                    //drives control signals of AHB
+  task drive_control_signals(ahb_trans trans_h); 				                    //drives control signals of AHB
     if(vif.drv_cb.hresetn == 0) begin
       vif.drv_cb.htrans <= 0;
     end
@@ -81,7 +81,7 @@ task run();
     end
   endtask
 
-  task drive_data_signals(AHB_trans trans_h);                                //drives the data signals
+  task drive_data_signals(ahb_trans trans_h);                                //drives the data signals
     wait(data_phase_que.size != 0);                         //checking if the data phase data present or not
     repeat(2) @(vif.drv_cb iff vif.drv_cb.hready);
     trans_h = data_phase_que.pop_front();

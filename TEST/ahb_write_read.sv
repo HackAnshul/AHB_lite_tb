@@ -1,21 +1,11 @@
-////////////////////////////////////////
-// Company: 
-// Engineer: Keertan Patel
-// 
-// Create Date: 4.5.2025 10:41:16
-// Module Name: AHB_write_read
-// Project Name: AHB slave verification 
-// Description: Targeted testcase read and write on known address and data
-//
-// v1.0 - File Created
-///////////////////////////////////////
+
 
 
 // guard statement to avoid multiple compilation of a file
 `ifndef AHB_WRITE_READ_SV
 `define AHB_WRITE_READ_SV
   
-class AHB_write_read extends AHB_gen;
+class ahb_write_read extends ahb_gen;
   //targeted testcase for write and read on known address and known data
   task run();
     //write operation for INCR4

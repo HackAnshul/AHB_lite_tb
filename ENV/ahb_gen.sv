@@ -9,7 +9,7 @@
 `ifndef AHB_GEN_SV
 `define AHB_GEN_SV
 
-class ahb_gen;
+virtual class ahb_gen;
 
   mailbox #(ahb_trans) gen2drv;
   ahb_trans trans_h,trans_copy;
@@ -17,7 +17,7 @@ class ahb_gen;
     this.gen2drv = gen2drv;
   endfunction
 
-  pure task run();/*
+  pure virtual task run();/*
   repeat(20) begin
     trans_h =new();
     trans_copy = new trans_h;

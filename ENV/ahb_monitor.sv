@@ -44,14 +44,14 @@ class ahb_monitor;
     end
   endtask
 
-  task get_from_dut(AHB_trans trans_h);
+  task get_from_dut(ahb_trans trans_h);
     fork
       get_addr_phase(trans_h);
       get_data_phase(trans_h);
     join_any
   endtask
 
-  task get_addr_phase(AHB_trans trans_h);
+  task get_addr_phase(ahb_trans trans_h);
     @(vif.mon_cb iff vif.mon_cb.hready);
     case (vif.mon_cb.hburst)
       3'b000:trans_h.hburst_e = SINGLE;
@@ -79,7 +79,7 @@ class ahb_monitor;
     end
   endtask
 
-  task get_data_phase(AHB_trans trans_h);
+  task get_data_phase(ahb_trans trans_h);
     repeat (2) @(vif.mon_cb iff vif.mon_cb.hready);
     if(vif.mon_cb.hwrite)
       trans_h.hwdata.push_back(vif.mon_cb.hwdata);
