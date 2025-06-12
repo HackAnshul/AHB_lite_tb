@@ -1,0 +1,884 @@
+# //  Questa Sim-64
+# //  Version 2023.4 linux_x86_64 Oct  9 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# vsim -voptargs="+acc" ahb_tb_top "+BACK2BACK" 
+# Start time: 16:36:16 on Jun 12,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.ahb_inf(fast)
+# Loading work.ahb_pkg(fast)
+# Loading work.ahb_tb_top(fast)
+# Loading work.ahb_inf(fast__2)
+# Loading work.ahb3liten(fast)
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'HREADY'. The port definition is at: ../ENV/ahb_lite_slave.svp(105).
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top/DUT File: ../TOP/testbench.sv Line: 16
+add wave -position insertpoint sim:/ahb_tb_top/inf/drv_cb/*
+add wave -position insertpoint sim:/ahb_tb_top/inf/mon_cb/*
+add wave -position insertpoint sim:/ahb_tb_top/DUT/*
+run -all
+# ** Warning: (vsim-3881) ../ENV/ahb_scoreboard.sv(23): Sign-and-Width conversion applied in bin 'HADDR_HRNG' for Coverpoint 'HADDR_CP'. Value '-1' changed to '0 (minimum)' value.
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top
+# ** Warning: (vsim-3882) ../ENV/ahb_scoreboard.sv(23): Out of bounds value range in bin 'HADDR_HRNG' for Coverpoint 'HADDR_CP' converted to nearest valid bounded range of [0:0].
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top
+# ** Warning: (vsim-3881) ../ENV/ahb_scoreboard.sv(29): Sign-and-Width conversion applied in bin 'HWDATA_HRNG' for Coverpoint 'HWDATA_CP'. Value '-1' changed to '0 (minimum)' value.
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top
+# ** Warning: (vsim-3882) ../ENV/ahb_scoreboard.sv(29): Out of bounds value range in bin 'HWDATA_HRNG' for Coverpoint 'HWDATA_CP' converted to nearest valid bounded range of [0:0].
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top
+# ** Warning: (vsim-3881) ../ENV/ahb_scoreboard.sv(35): Sign-and-Width conversion applied in bin 'HRDATA_HRNG' for Coverpoint 'HRDATA_CP'. Value '-1' changed to '0 (minimum)' value.
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top
+# ** Warning: (vsim-3882) ../ENV/ahb_scoreboard.sv(35): Out of bounds value range in bin 'HRDATA_HRNG' for Coverpoint 'HRDATA_CP' converted to nearest valid bounded range of [0:0].
+#    Time: 0 ns  Iteration: 0  Instance: /ahb_tb_top
+# =====================  Generator ===================== @0 
+# haddr  : '{2933144463, 2933144464, 2933144465, 2933144466, 2933144467, 2933144468, 2933144469, 2933144470, 2933144471, 2933144472}
+# hwdata : '{3828479702, 257195151, 1587521199, 1668095991, 2856131991, 2981171418, 376187733, 3660061050, 1106558239, 2168894107}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 3, 3, 3, 3, 3, 2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{1395107844}
+# hwdata : '{2382914063}
+# hrdata : '{}
+# htrans : '{2, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{971211696, 971211700, 971211704, 971211708}
+# hwdata : '{955950418, 3126024741, 1455390159, 1548382123}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{2869063085}
+# hwdata : '{259947500}
+# hrdata : '{}
+# htrans : '{2, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |SINGLE | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{4208732904, 4208732908, 4208732912, 4208732916, 4208732920, 4208732924, 4208732896, 4208732900}
+# hwdata : '{1895757042, 4100449560, 742285394, 128543809, 111081902, 952017879, 2887002202, 3949919506}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 3, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | WRAP8 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{1466166705, 1466166706, 1466166707, 1466166708, 1466166709, 1466166710, 1466166711, 1466166704}
+# hwdata : '{4142440877, 735382777, 3457643966, 2635364776, 3216505108, 45106662, 106399003, 3909007304}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 3, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   | WRAP8 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{4018261364, 4018261366, 4018261360, 4018261362}
+# hwdata : '{4147501018, 3177020481, 3822494435, 3363925623}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 1   | WRAP4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{4059106826, 4059106828, 4059106830, 4059106824}
+# hwdata : '{2068762213, 692809318, 475277939, 267217495}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 1   | WRAP4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{1479299933}
+# hwdata : '{1155660473}
+# hrdata : '{}
+# htrans : '{2, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |SINGLE | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{1611771189, 1611771190, 1611771191, 1611771192}
+# hwdata : '{2509631659, 3185804617, 678715929, 2177114250}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   | INCR4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{2513655523, 2513655524, 2513655525, 2513655526, 2513655527, 2513655528, 2513655529, 2513655530}
+# hwdata : '{0, 0, 0, 0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 3, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   | INCR8 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{482287154, 482287155, 482287156, 482287157, 482287158, 482287159, 482287160, 482287161, 482287162, 482287163, 482287164, 482287165}
+# hwdata : '{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |  INCR | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{1785435422, 1785435424, 1785435426, 1785435428}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 1   | INCR4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{2719615450, 2719615451, 2719615452, 2719615453, 2719615454}
+# hwdata : '{0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |  INCR | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{3515169584, 3515169588, 3515169592, 3515169596, 3515169536, 3515169540, 3515169544, 3515169548, 3515169552, 3515169556, 3515169560, 3515169564, 3515169568, 3515169572, 3515169576, 3515169580}
+# hwdata : '{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 2   |WRAP16 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{3148041855, 3148041856, 3148041857, 3148041858}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   | INCR4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{2137319530}
+# hwdata : '{0}
+# hrdata : '{}
+# htrans : '{2, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 1   |SINGLE | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{477563466, 477563468, 477563470, 477563472}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 1   | INCR4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{1246771336, 1246771337, 1246771338, 1246771339}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   | INCR4 | 0   |
+# =====================  Generator ===================== @0 
+# haddr  : '{888237532, 888237536, 888237540, 888237544}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{2, 3, 3, 3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @5 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================   expected ===================== @5 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================     actual ===================== @5 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================    Monitor ===================== @15 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{0}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================    Monitor ===================== @25 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================   expected ===================== @25 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================     actual ===================== @25 
+# haddr  : '{0}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================    Monitor ===================== @35 
+# haddr  : '{2933144463}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @35 
+# haddr  : '{0}
+# hwdata : '{0}
+# hrdata : '{}
+# htrans : '{0}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |SINGLE | 0   |
+# =====================   expected ===================== @35 
+# haddr  : '{2933144463}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @35 
+# haddr  : '{2933144463}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @45 
+# haddr  : '{2933144464}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @45 
+# haddr  : '{2933144463}
+# hwdata : '{3828479702}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @45 
+# haddr  : '{2933144464}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @45 
+# haddr  : '{2933144464}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @55 
+# haddr  : '{2933144465}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @55 
+# haddr  : '{2933144464}
+# hwdata : '{257195151}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @55 
+# haddr  : '{2933144465}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @55 
+# haddr  : '{2933144465}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @65 
+# haddr  : '{2933144466}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @65 
+# haddr  : '{2933144465}
+# hwdata : '{1587521199}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @65 
+# haddr  : '{2933144466}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @65 
+# haddr  : '{2933144466}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @75 
+# haddr  : '{2933144467}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @75 
+# haddr  : '{2933144466}
+# hwdata : '{1668095991}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @75 
+# haddr  : '{2933144467}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @75 
+# haddr  : '{2933144467}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @85 
+# haddr  : '{2933144468}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @85 
+# haddr  : '{2933144467}
+# hwdata : '{2856131991}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @85 
+# haddr  : '{2933144468}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @85 
+# haddr  : '{2933144468}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @95 
+# haddr  : '{2933144469}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @95 
+# haddr  : '{2933144468}
+# hwdata : '{2981171418}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @95 
+# haddr  : '{2933144469}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @95 
+# haddr  : '{2933144469}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @105 
+# haddr  : '{2933144470}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @105 
+# haddr  : '{2933144469}
+# hwdata : '{376187733}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @105 
+# haddr  : '{2933144470}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @105 
+# haddr  : '{2933144470}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     Driver ===================== @115 
+# haddr  : '{}
+# hwdata : '{3828479702, 257195151, 1587521199, 1668095991, 2856131991, 2981171418, 376187733, 3660061050, 1106558239, 2168894107}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @115 
+# haddr  : '{2933144471}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @115 
+# haddr  : '{2933144470}
+# hwdata : '{3660061050}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @115 
+# haddr  : '{2933144471}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @115 
+# haddr  : '{2933144471}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @125 
+# haddr  : '{2933144472}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @125 
+# haddr  : '{2933144471}
+# hwdata : '{1106558239}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @125 
+# haddr  : '{2933144472}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @125 
+# haddr  : '{2933144472}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     Driver ===================== @135 
+# haddr  : '{}
+# hwdata : '{2382914063}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================    Monitor ===================== @135 
+# haddr  : '{2933144472}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @135 
+# haddr  : '{2933144472}
+# hwdata : '{2168894107}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @135 
+# haddr  : '{2933144472}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================     actual ===================== @135 
+# haddr  : '{2933144472}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================    Monitor ===================== @145 
+# haddr  : '{1395107844}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================    Monitor ===================== @145 
+# haddr  : '{2933144472}
+# hwdata : '{2168894107}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |  INCR | 0   |
+# =====================   expected ===================== @145 
+# haddr  : '{1395107844}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================     actual ===================== @145 
+# haddr  : '{1395107844}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================    Monitor ===================== @155 
+# haddr  : '{1395107844}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================    Monitor ===================== @155 
+# haddr  : '{1395107844}
+# hwdata : '{2382914063}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================   expected ===================== @155 
+# haddr  : '{1395107844}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================     actual ===================== @155 
+# haddr  : '{1395107844}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================    Monitor ===================== @165 
+# haddr  : '{971211696}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @165 
+# haddr  : '{1395107844}
+# hwdata : '{2382914063}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   |SINGLE | 0   |
+# =====================   expected ===================== @165 
+# haddr  : '{971211696}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     actual ===================== @165 
+# haddr  : '{971211696}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @175 
+# haddr  : '{971211700}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @175 
+# haddr  : '{971211696}
+# hwdata : '{955950418}
+# hrdata : '{}
+# htrans : '{2}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================   expected ===================== @175 
+# haddr  : '{971211700}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     actual ===================== @175 
+# haddr  : '{971211700}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     Driver ===================== @185 
+# haddr  : '{}
+# hwdata : '{955950418, 3126024741, 1455390159, 1548382123}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @185 
+# haddr  : '{971211704}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @185 
+# haddr  : '{971211700}
+# hwdata : '{3126024741}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================   expected ===================== @185 
+# haddr  : '{971211704}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     actual ===================== @185 
+# haddr  : '{971211704}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @195 
+# haddr  : '{971211708}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @195 
+# haddr  : '{971211704}
+# hwdata : '{1455390159}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================   expected ===================== @195 
+# haddr  : '{971211708}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     actual ===================== @195 
+# haddr  : '{971211708}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     Driver ===================== @205 
+# haddr  : '{}
+# hwdata : '{259947500}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |SINGLE | 0   |
+# =====================    Monitor ===================== @205 
+# haddr  : '{971211708}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @205 
+# haddr  : '{971211708}
+# hwdata : '{1548382123}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================   expected ===================== @205 
+# haddr  : '{971211708}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     actual ===================== @205 
+# haddr  : '{971211708}
+# hwdata : '{}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================    Monitor ===================== @215 
+# haddr  : '{971211708}
+# hwdata : '{1548382123}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | INCR4 | 0   |
+# =====================     Driver ===================== @295 
+# haddr  : '{}
+# hwdata : '{1895757042, 4100449560, 742285394, 128543809, 111081902, 952017879, 2887002202, 3949919506}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 2   | WRAP8 | 0   |
+# =====================     Driver ===================== @385 
+# haddr  : '{}
+# hwdata : '{4142440877, 735382777, 3457643966, 2635364776, 3216505108, 45106662, 106399003, 3909007304}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   | WRAP8 | 0   |
+# =====================     Driver ===================== @435 
+# haddr  : '{}
+# hwdata : '{4147501018, 3177020481, 3822494435, 3363925623}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 1   | WRAP4 | 0   |
+# =====================     Driver ===================== @485 
+# haddr  : '{}
+# hwdata : '{2068762213, 692809318, 475277939, 267217495}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 1   | WRAP4 | 0   |
+# =====================     Driver ===================== @505 
+# haddr  : '{}
+# hwdata : '{1155660473}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   |SINGLE | 0   |
+# =====================     Driver ===================== @555 
+# haddr  : '{}
+# hwdata : '{2509631659, 3185804617, 678715929, 2177114250}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 1    | 0   | INCR4 | 0   |
+# =====================     Driver ===================== @655 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   | INCR8 | 0   |
+# =====================     Driver ===================== @795 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |  INCR | 0   |
+# =====================     Driver ===================== @875 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 1   | INCR4 | 0   |
+# =====================     Driver ===================== @945 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   |  INCR | 0   |
+# =====================     Driver ===================== @1145 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 2   |WRAP16 | 0   |
+# =====================     Driver ===================== @1205 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   | INCR4 | 0   |
+# =====================     Driver ===================== @1225 
+# haddr  : '{}
+# hwdata : '{0}
+# hrdata : '{}
+# htrans : '{3}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 1   |SINGLE | 0   |
+# =====================     Driver ===================== @1305 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 1   | INCR4 | 0   |
+# =====================     Driver ===================== @1365 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 0   | INCR4 | 0   |
+# =====================     Driver ===================== @1425 
+# haddr  : '{}
+# hwdata : '{0, 0, 0, 0}
+# hrdata : '{}
+# htrans : '{}
+# | hwrite | hsize |  hburst_e  | hresp |
+# | 0    | 2   | INCR4 | 0   |
+# Causality operation skipped due to absence of debug database file
+# End time: 16:41:06 on Jun 12,2025, Elapsed time: 0:04:50
+# Errors: 0, Warnings: 7

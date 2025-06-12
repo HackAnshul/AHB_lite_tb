@@ -34,8 +34,8 @@ class ahb_monitor;
           trans_h=new();
           get_from_dut(trans_h);
           trans_h.print("Monitor");
-          mon2ref.put(trans_h);
-          mon2scb.put(trans_h);
+          mon2rf.put(trans_h);
+          mon2sb.put(trans_h);
         end
         wait_reset_assert();
       join_any

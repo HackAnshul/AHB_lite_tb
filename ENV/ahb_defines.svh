@@ -36,14 +36,14 @@
     if ($test$plusargs(`"TEST_NAME`")) begin \
       ``TEST_OBJ`` = new();\
       void'(``TEST_OBJ``.randomize());\
-      env.gen_h = ``TEST_OBJ``;\
+      env.gen = ``TEST_OBJ``;\
     end
 
 `define sv_do_on_with(TEST_NAME,TEST_OBJ,CNSTR)\
     if ($test$plusargs(`"TEST_NAME`")) begin \
       ``TEST_OBJ`` = new();\
       void'(``TEST_OBJ``.randomize() with ``CNSTR``);\
-      env.gen_h = ``TEST_OBJ``;\
+      env.gen = ``TEST_OBJ``;\
     end
 
 `define ahb_checker(ACT_DATA,EXP_DATA)\

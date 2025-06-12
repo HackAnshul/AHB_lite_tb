@@ -17,7 +17,7 @@ class ahb_ref_model;
   endfunction
 
   task run();
-    repeat(20) begin
+    forever begin
       mon2rf.get(trans_h1);
       trans_h2 = new trans_h1;
       predict_data(trans_h2);

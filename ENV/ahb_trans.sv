@@ -10,7 +10,7 @@ class ahb_trans extends sv_sequence_item;
   bit [1:0] htrans[$];                   //transaction type
   rand bit hwrite;                   //!read/write
   rand bit[2:0] hsize;             //transfer data width
-  //bit[2:0]hburst;                 //burst type
+  //bit[2:0]hburst_e;                 //burst type
   rand burst_type hburst_e;     //hburst_type enum
   bit [3:0] hprot;
 
@@ -42,14 +42,11 @@ class ahb_trans extends sv_sequence_item;
   }
 
   constraint arr_sizes {
-    if(hburst_e == SINGLE) haddr.size() == 1;
-    if (hburst_e == WRAP4) length  == 4;
-    if (hburst_e == INCR4) length == 4;
-    if (hburst_e == WRAP8) length == 8;
-    if (hburst_e == INCR8) length == 8;
-    if (hburst_e == WRAP16) length == 16;
-    if (hburst_e == INCR16) length == 16;
-    if (hburst_e == INCR) length inside {[1:25]}; //temporarily
+    if(hburst_e == SINGLE) length == 1;
+    else if (hburst_e == WRAP4 || hburst_e == INCR4) length == 4;
+    else if (hburst_e == WRAP8 || hburst_e == INCR8) length == 8;
+    else if (hburst_e == WRAP16 || hburst_e == INCR16) length == 16;
+    else if (hburst_e == INCR) length inside {[1:25]}; //temporarily
 
     hwdata.size() == length;
     haddr.size() == length;
@@ -77,27 +74,47 @@ class ahb_trans extends sv_sequence_item;
     $display("hwdata : %p",hwdata);
     $display("hrdata : %p",hrdata);
     $display("htrans : %p",htrans);
-    $display("| hwrite | hsize |  hburst  | hresp |");
+    $display("| hwrite | hsize |  hburst_e  | hresp |");
     $display("| %0d    | %0d   |%6s | %0d   |", hwrite, hsize, hburst_e.name, hresp);
   endfunction
 
   //function for calculating number of transfers in a transaction
   function int calc_txf();
-    case(this.hburst_e)
+    /*case(this.hburst_e)
       SINGLE : return 1;
-      INCR : return 1;
+      INCR : return length;
       WRAP4,INCR4: return 4;
       WRAP8,INCR8: return 8;
       WRAP16, INCR16: return 16;
-    endcase
+    endcase*/
+   return length;
   endfunction
 
 
   function void post_randomize();
+    /*
     for (int i=1; i < haddr.size; i++) begin
       haddr[i] = haddr[i-1] + (2**hsize);
-    end
+    end*/
 
+    if(hburst_e == INCR || hburst_e == INCR4 || hburst_e == INCR8 || hburst_e == INCR16) begin
+      for(int i=1; i < haddr.size;i++) begin
+        haddr[i] = haddr[i-1] + (2**hsize);
+      end
+    end
+    if(hburst_e == WRAP4 || hburst_e == WRAP8 || hburst_e == WRAP16) begin
+      int a = (haddr[0]/(haddr.size*(2**hsize)));
+      bit [`ADDR_WIDTH-1: 0] start_addr = a*(haddr.size*(2**hsize));
+      bit [`ADDR_WIDTH-1: 0] end_addr = start_addr + ((haddr.size-1)*(2**hsize));
+      for(int i=0; i < haddr.size;i++) begin
+        if(i!=0) begin
+          if(haddr[i-1] == end_addr ) begin
+            haddr[i] = ((haddr[0]/(haddr.size*(2**hsize))))*(haddr.size*(2**hsize));
+          end
+          else haddr[i] = haddr[i-1]+(2**hsize);
+        end
+      end
+    end
     //htrans = new [length];
     //htrans[0] = 2'b10;
     htrans.push_back(2'b10);

@@ -11,8 +11,8 @@ class ahb_base_test;
 
   //testcases
   //ahb_exp_test exp;
-  AHB_write_read wr_h;
-  AHB_back2back b2b_h;
+  ahb_write_read wr_h;
+  ahb_back2back b2b_h;
   ////////////
 
   // declare all interface
@@ -32,8 +32,8 @@ class ahb_base_test;
     env = new();
     env.build();
     //void'($value$plusargs("iter=%d",itr));
-    `sv_do_on_with(WRITE_READ, wr_h, {no_of_trans == 5;})
-    `sv_do_on_with(BACK2BACK, b2b_h, {no_of_trans == 5;})
+    `sv_do_on(WRITE_READ, wr_h)
+    `sv_do_on(BACK2BACK, b2b_h)
   endfunction
 
 
